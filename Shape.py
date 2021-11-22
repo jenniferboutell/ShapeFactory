@@ -1,4 +1,4 @@
-from DrawingProgram import DrawingProgram
+
 
 """Attributes
 name of shape

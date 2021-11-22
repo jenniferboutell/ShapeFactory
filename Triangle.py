@@ -3,7 +3,8 @@ from Shape import Shape
 
 class Triangle:
 
-    def __init__(self, side1, side2, side3, area, perimeter, sp):
+    def __init__(self, name, side1, side2, side3, area, perimeter, sp):
+        self.name = "triangle"
         self.side1 = 0
         self.side2 = 0
         self.side3 = 0

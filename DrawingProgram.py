@@ -1,4 +1,5 @@
 import tkinter
+from Shape import Shape
 
 """Attributes(instance fields/data)
 a list/collection of Shapes
@@ -19,26 +20,33 @@ any other behaviors you feel are necessary for the class"""
 
 class DrawingProgram:
 
-    def __init__(shapes):
-        pass
+    def __init__(self, shapes):
+        Shape.__init__(self)
+        self.shapes = []
 
-    def add_shape(shape):
-        pass
+    def add_shape(self, Shape):
+        self.shapes.append(Shape)
 
-    def remove_shape(shape):
-        pass
+    def remove_shape(self, Shape):
+        counter = 0
+        for shape in self.shapes:
+            if shape == self.Shape:
+                self.shapes.remove(shape)
+                counter += 1
+        return counter
 
-    def print_shape(shape):
-        pass
+    def print_shape(self, shape):
+        Shape.draw(self.shape)
 
     def sort_shapes(self):
         pass
 
     def __str__(self):
+        return self.name + ", area: " + str(self.area) + ", perimeter: " + str(self.perimeter)
+
+    def get_shape(self, index):
         pass
 
-    def get_shape(index):
+    def set_shape(self, index, shape):
         pass
 
-    def set_shape(index, shape):
-        pass
