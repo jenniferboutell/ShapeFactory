@@ -8,7 +8,7 @@ class DrawingProgram:
     A mock "drawing" program, which contains an ordered collection of shapes.
     """
 
-    def __init__(self, shapes: Optional[List[Shape]]) -> None:
+    def __init__(self, shapes: Optional[List[Shape]] = None) -> None:
         """
         Constructor. Initializes shapes collection to the list passed in, if any.
 
@@ -16,7 +16,7 @@ class DrawingProgram:
         """
         if shapes is None:
             shapes = []
-        self.__shapes = shapes
+        self.__shapes: List[Shape] = shapes
 
     def __iter__(self):
         """
@@ -46,33 +46,35 @@ class DrawingProgram:
             raise TypeError(f"add_shape expects shape of type Shape or subclass, but got {type(shape)}")
         self.__shapes.append(shape)
 
-    def remove_shape(self, shape: Shape) -> int:
+    def remove_shape(self, shape: Optional[Shape] = None) -> int:
         """
         Remove from the shapes collection all that match type the shape passed in.
 
         :param shape: instance of Shape or one of its subclasses.
         :return: The number of shapes removed from the collection.
         """
-        if not isinstance(shape, Shape):
-            raise TypeError(f"remove_shape expects shape of type Shape or subclass, but got {type(shape)}")
+        if shape is not None and not isinstance(shape, Shape):
+            raise TypeError(f"remove_shape expects shape of type None or a Shape subclass, but got {type(shape)}")
         counter = 0
         for s in self.__shapes:
-            if shape == s:
+            if shape is None or isinstance(s, type(shape)):
                 self.__shapes.remove(s)
                 counter += 1
         return counter
 
-    @staticmethod
-    def print_shape(shape: Shape) -> None:
+    # @staticmethod  # TODO should not be static, right?
+    def print_shape(self, shape: Optional[Shape] = None) -> None:
         """
         Prints all in shapes collection that match the type of the shape passed in.
 
         :param shape: Instance of Shape or one of its subclasses.
         :return: None
         """
-        if not isinstance(shape, Shape):
-            raise TypeError(f"print_shape expects shape of type Shape or subclass, but got {type(shape)}")
-        print(shape)
+        if shape is not None and not isinstance(shape, Shape):
+            raise TypeError(f"print_shape expects shape of either None or Shape subclass, but got {type(shape)}")
+        for s in self.__shapes:
+            if shape is None or isinstance(s, type(shape)):
+                print(s)
 
     def sort_shapes(self) -> None:
         """

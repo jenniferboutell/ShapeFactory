@@ -1,10 +1,17 @@
+from math import pi
 from Shape import Shape
 
 
-class Circle:
+class Circle(Shape):
 
-    def __init__(self, name, radius, area, perimeter):
-        self.name = "circle"
-        self.radius = 0
-        self.area = 3.14159265 * (float(self.radius) ** 2)
-        self.perimeter = 2 * 3.14159265 * radius
+    def __init__(self, radius):
+        super().__init__()
+        self.radius = radius
+
+    @property
+    def area(self):
+        return pi * (float(self.radius) ** 2)
+
+    @property
+    def perimeter(self):
+        return 2 * pi * self.radius

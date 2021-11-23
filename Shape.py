@@ -1,7 +1,7 @@
-from abc import ABC, abstractmethod
+from abc import ABCMeta, abstractmethod
 
 
-class Shape(ABC):
+class Shape(metaclass=ABCMeta):
     """
     Attributes
     - name of shape
@@ -26,16 +26,18 @@ class Shape(ABC):
         self.__name: str = str(self.__class__)
 
     def __str__(self):
-        return f"{self.name}, area: {self.area()}, perimeter: {self.perimeter()}"
+        return f"{self.name}, area: {self.area}, perimeter: {self.perimeter}"
 
     @property
     def name(self):
         return self.__name
 
+    @property
     @abstractmethod
     def area(self):
         pass
 
+    @property
     @abstractmethod
     def perimeter(self):
         pass
