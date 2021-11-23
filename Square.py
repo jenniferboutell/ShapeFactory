@@ -1,8 +1,7 @@
-from Shape import Shape
+from Rectangle import Rectangle
 
-class Square:
 
-    def __init__(self, length, area, perimeter):
-        self.length = 0
-        self.area = self.length ** 2
-        self.perimeter = self.length * 4
+class Square(Rectangle):
+
+    def __init__(self, length):
+        super().__init__(length, length)

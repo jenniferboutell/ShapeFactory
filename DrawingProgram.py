@@ -1,44 +1,121 @@
-import tkinter
+from typing import Optional, List
+from Shape import Shape
+from DrawingProgramIterator import DrawingProgramIterator
 
-"""Attributes(instance fields/data)
-a list/collection of Shapes
-any other data you feel is necessary for the class
-Behaviors(methods)
-a constructor/init that can be passed a list of Shapes or nothing at all
-add_shape(Shape): a method that adds a Shape
-remove_shape(Shape): a method that removes ALL shapes that match the one passed as a parameter -- 
-it should return in integer value to signify how many of that shape was removed
-print_shape(Shape): prints all shapes that match the type of the shape passed in
-sort_shapes(): sorts the list/collection of shapes -- you must use a sort that runs in O(nlogn) for its worst case
-shapes will be sorted first by name, then by area if names are same
-__str__: returns a string representation of each of the shapes -- each shape will be separated from others 
-by a newline (\n)
-get_shape(index): returns the shape at the specified index
-set_shape(index, Shape): replaces the shape at the specified index
-any other behaviors you feel are necessary for the class"""
 
 class DrawingProgram:
+    """
+    A mock "drawing" program, which contains an ordered collection of shapes.
+    """
 
-    def __init__(shapes):
-        pass
+    def __init__(self, shapes: Optional[List[Shape]] = None) -> None:
+        """
+        Constructor. Initializes shapes collection to the list passed in, if any.
 
-    def add_shape(shape):
-        pass
+        :param shapes: a list of Shapes or nothing at all.
+        """
+        if shapes is None:
+            shapes = []
+        self.__shapes: List[Shape] = shapes
 
-    def remove_shape(shape):
-        pass
+    def __iter__(self):
+        """
+        Returns an iterator for shapes collection.
 
-    def print_shape(shape):
-        pass
-
-    def sort_shapes(self):
-        pass
+        :return: Iterator for shapes collection.
+        """
+        return DrawingProgramIterator(self.__shapes)
 
     def __str__(self):
+        """
+        Returns a string representation of each of the shapes.
+        Each shape will be separated from others by a newline (\n).
+
+        :return: String representation.
+        """
+        return ''.join([f"{s}\n" for s in self.__shapes])
+
+    def add_shape(self, shape: Shape) -> None:
+        """
+        Add a Shape to the shapes collection.
+
+        :param shape: Instance of a Shape subclass.
+        :return: None.
+        """
+        if not isinstance(shape, Shape):
+            raise TypeError(f"add_shape expects shape of type Shape or subclass, but got {type(shape)}")
+        self.__shapes.append(shape)
+
+    def remove_shape(self, shape: Optional[Shape] = None) -> int:
+        """
+        Remove from the shapes collection all that match type the shape passed in.
+
+        :param shape: instance of Shape or one of its subclasses.
+        :return: The number of shapes removed from the collection.
+        """
+        if shape is not None and not isinstance(shape, Shape):
+            raise TypeError(f"remove_shape expects shape of type None or a Shape subclass, but got {type(shape)}")
+        counter = 0
+        for s in self.__shapes:
+            if shape is None or isinstance(s, type(shape)):
+                self.__shapes.remove(s)
+                counter += 1
+        return counter
+
+    # @staticmethod  # TODO should not be static, right?
+    def print_shape(self, shape: Optional[Shape] = None) -> None:
+        """
+        Prints all in shapes collection that match the type of the shape passed in.
+
+        :param shape: Instance of Shape or one of its subclasses.
+        :return: None
+        """
+        if shape is not None and not isinstance(shape, Shape):
+            raise TypeError(f"print_shape expects shape of either None or Shape subclass, but got {type(shape)}")
+        for s in self.__shapes:
+            if shape is None or isinstance(s, type(shape)):
+                print(s)
+
+    def sort_shapes(self) -> None:
+        """
+        Sorts the collection of shapes, replacing the current collection order.
+        Shapes will be sorted first by name, then by area if names are same.
+        Uses a sort that runs in O(nlogn) for its worst case, e.g. Merge or Heap.
+
+        :return: None
+        """
+        # TODO in-place Merge sort
         pass
 
-    def get_shape(index):
-        pass
+    def get_shape(self, index: int) -> Optional[Shape]:
+        """
+        Returns the shape at the specified index in shapes collection.
 
-    def set_shape(index, shape):
-        pass
+        :param index: A valid index in the shapes collection.
+        :return: Specified element in shapes collection.
+        """
+        if not isinstance(index, int):
+            raise TypeError(f"get_shape expects index of type int, but got {type(index)}")
+        if len(self.__shapes) == 0:
+            raise ValueError(f"get_shape cannot succeed; no shapes in collection")
+        if not 0 <= index < len(self.__shapes):
+            raise ValueError(f"get_shape expects index in valid range")
+        return self.__shapes[index]
+
+    def set_shape(self, index: int, shape: Shape) -> None:
+        """
+        Replaces the shape at the specified index in collection.
+
+        :param index: A valid index in the shapes collection.
+        :param shape: Instance of Shape subclass to replace current element.
+        :return: None
+        """
+        if not isinstance(index, int):
+            raise TypeError(f"set_shape needs index of type int, but got {type(index)}")
+        if not isinstance(shape, Shape):
+            raise TypeError(f"set_shape needs shape of type Shape or subclass, but got {type(shape)}")
+        if len(self.__shapes) == 0:
+            raise ValueError(f"set_shape cannot succeed; no shapes in collection")
+        if not 0 <= index < len(self.__shapes):
+            raise ValueError(f"set_shape needs index in valid range")
+        self.__shapes[index] = shape
