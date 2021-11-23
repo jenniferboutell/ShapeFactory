@@ -1,1 +1,17 @@
+# Git should ignore its own config dir by default, but hey.
 .git
+
+# PyCharm IDE. Guidance varies on what to ignore.
+# https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
+# https://stackoverflow.com/questions/24516814/should-i-ignore-the-idea-folder-when-using-pycharm-with-git
+# https://intellij-support.jetbrains.com/hc/en-us/community/posts/
+#   360000276420-Files-added-to-gitignore-are-still-shown-in-commit-changes
+# PyCharm itself automatically adds a .idea/.gitgnore containing:
+# /shelf/
+# /workspace.xml
+# Safest course is to just ignore all of it.
+# This may require each user to do local setup, but only one-time hit.
+# However... since .idea/ and its contents were included in the initial commit,
+# may be too late for subsequent entry in .gitignore to prevent further pollution.
+# Probably wise to also add an entry in .git/info/exclude in local repo.
+.idea
