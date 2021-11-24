@@ -23,24 +23,26 @@ class Shape(metaclass=ABCMeta):
     """
 
     def __init__(self) -> None:
-        self.__name: str = str(self.__class__)
+        self.__name: str = str(self.__class__.__name__)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name}, area: {self.area}, perimeter: {self.perimeter}"
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
 
     @property
     @abstractmethod
-    def area(self):
+    def area(self) -> float:
         pass
 
     @property
     @abstractmethod
-    def perimeter(self):
+    def perimeter(self) -> float:
         pass
 
-    def draw(self):
+    def draw(self) -> None:
         print(self)
+
+# END

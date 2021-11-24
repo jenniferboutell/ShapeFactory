@@ -22,3 +22,5 @@
 # may be too late for subsequent entry in .gitignore to have desired effect.
 # Probably wise to also add an entry in .git/info/exclude in local repo.
 .idea
+
+**/.pytest_cache
