@@ -1,22 +1,24 @@
+from typing import Union
 from Shape import Shape
+
+Number = Union[float, int]
 
 
 class Triangle(Shape):
 
-    def __init__(self, side1, side2, side3):
+    def __init__(self, side1: Number, side2: Number, side3: Number) -> None:
         super().__init__()
-        self.side1 = side1
-        self.side2 = side2
-        self.side3 = side3
+        self.__side1 = float(side1)
+        self.__side2 = float(side2)
+        self.__side3 = float(side3)
 
     @property
-    def perimeter(self):
-        return self.side1 + self.side2 + self.side3
+    def perimeter(self) -> float:
+        return self.__side1 + self.__side2 + self.__side3
 
     @property
-    def area(self):
+    def area(self) -> float:
         sp = self.perimeter / 2
-        return (sp * (sp - self.side1) * (sp - self.side2) * (sp - self.side3)) ** .5
+        return (sp * (sp - self.__side1) * (sp - self.__side2) * (sp - self.__side3)) ** .5
 
-
-
+# END
