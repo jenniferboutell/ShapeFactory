@@ -1,0 +1,31 @@
+Testing started at 11:40 PM ...
+Launching pytest with arguments C:/Users/Daphne/PycharmProjects/ShapeFactory/tests/test_drawing_program.py --no-header --no-summary -q in C:\Users\Daphne\PycharmProjects\ShapeFactory\tests
+
+============================= test session starts =============================
+collecting ... collected 21 items
+
+test_drawing_program.py::test_dp_init_0 PASSED                           [  4%]
+test_drawing_program.py::test_dp_init_1 PASSED                           [  9%]
+test_drawing_program.py::test_dp_init_5 PASSED                           [ 14%]
+test_drawing_program.py::test_dp_sort_shapes_1 PASSED                    [ 19%]
+test_drawing_program.py::test_dp_sort_shapes_empty PASSED                [ 23%]
+test_drawing_program.py::test_dp_sort_shapes_single PASSED               [ 28%]
+test_drawing_program.py::test_dp_sort_shapes_ascending PASSED            [ 33%]
+test_drawing_program.py::test_dp_sort_shapes_descending PASSED           [ 38%]
+test_drawing_program.py::test_print_shape PASSED                         [ 42%]
+test_drawing_program.py::test_add_shape PASSED                           [ 47%]
+test_drawing_program.py::test_remove_shape PASSED                        [ 52%]
+test_drawing_program.py::test__str__ PASSED                              [ 57%]
+test_drawing_program.py::test_dp_get_shape_1 PASSED                      [ 61%]
+test_drawing_program.py::test_dp_get_shape_2 PASSED                      [ 66%]
+test_drawing_program.py::test_dp_get_shape_3 PASSED                      [ 71%]
+test_drawing_program.py::test_dp_get_shape_valid PASSED                  [ 76%]
+test_drawing_program.py::test_dp_set_shape_1 PASSED                      [ 80%]
+test_drawing_program.py::test_dp_set_shape_2 PASSED                      [ 85%]
+test_drawing_program.py::test_sp_set_shape_3 PASSED                      [ 90%]
+test_drawing_program.py::test_sp_set_shape_4 PASSED                      [ 95%]
+test_drawing_program.py::test_sp_set_shape_valid PASSED                  [100%]
+
+============================= 21 passed in 0.22s ==============================
+
+Process finished with exit code 0

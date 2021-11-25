@@ -6,7 +6,7 @@ Jennifer Boutell
 Time spent on assignment
 
 JP - approximately 20 hours
-Jennifer - approximately 12 hours
+Jennifer - approximately 15 hours
 
 Division of Tasks:
 
@@ -16,6 +16,7 @@ Jennifer:
 - Wrote first draft of individual shape files, geometry etc.
 - Wrote merge sort algorithm for DrawingProgram
 - added docstrings
+- Worked on unit tests with much help from JP
 - Created UML diagram, readme, output captures and final package (unless JP submits this in
 which case he did the final packaging)
 
