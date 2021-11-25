@@ -9,6 +9,10 @@ class DrawingProgramIterator:
         self.__index = 0
 
     def __next__(self) -> Shape:
+        """
+        Iterates through shapes list as long as index is less than length of list
+        :return: each shape in shapes
+        """
         if self.__index == len(self.__shapes):
             raise StopIteration()
         shape = self.__shapes[self.__index]

@@ -16,6 +16,11 @@ class Circle(Shape):
         return self.__radius
 
     def identical(self, other) -> bool:
+        """
+        Determines equality based on type and radius
+        :param other:
+        :return: equality
+        """
         return type(self) == type(other) and self.radius == other.radius
 
     @property

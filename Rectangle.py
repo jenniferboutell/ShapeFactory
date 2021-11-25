@@ -20,6 +20,11 @@ class Rectangle(Shape):
         return self.__width
 
     def identical(self, other) -> bool:
+        """
+        Determines equality based on type, length, and width
+        :param other:
+        :return: equality
+        """
         return type(self) == type(other) and \
                {self.length, self.width} == {other.length, other.width}
 
