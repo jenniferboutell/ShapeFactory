@@ -66,7 +66,6 @@ class DrawingProgram:
                 counter += 1
         return counter
 
-    # @staticmethod  # TODO should not be static, right?
     def print_shape(self, shape: Optional[Shape] = None) -> None:
         """
         Prints all in shapes collection that match the type of the shape passed in.
@@ -77,7 +76,7 @@ class DrawingProgram:
         if shape is not None and not isinstance(shape, Shape):
             raise TypeError(f"print_shape expects shape of either None or Shape subclass, but got {type(shape)}")
         for s in self.__shapes:
-            if shape is None or isinstance(s, type(shape)):
+            if shape is None or s.name == shape.name:
                 print(s)
 
     @staticmethod
