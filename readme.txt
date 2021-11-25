@@ -6,7 +6,7 @@ Jennifer Boutell
 Time spent on assignment
 
 JP - approximately 20 hours
-Jennifer - approximately 12 hours
+Jennifer - approximately 15 hours
 
 Division of Tasks:
 
