@@ -32,6 +32,57 @@ class Shape(metaclass=ABCMeta):
     def name(self) -> str:
         return self.__name
 
+    @abstractmethod
+    def identical(self, other) -> bool:
+        """
+        Test for equivalence between two shapes, in a geometric sense, e.g.:
+        type(self) == type(other) and
+        {self.attr1, self.attr2, ...} == {other.attr1, other.attr2, ...}
+        For the types of shapes supported here, attributes are interchangeable,
+        i.e. length/width in Rectangle and three sides in Triangle.
+        For example, a Rectangles with length=2 and width=3 is considered
+        identical to a rectangle with length=3 and width=2.
+
+        :param other:
+        :return:
+        """
+        pass
+
+    def __eq__(self, other) -> bool:
+        """
+        Equality operator, adhering to match criteria in DrawingProgram::sort_shapes(),
+        for which the match criteria is only that both of the following match:
+        * object type (as reflected in its .name property)
+        * shape area (computed from underlying attributes)
+
+        In other words, it does NOT adhere to more traditional sense of equivalence,
+        wherein all the underlying attributes must be equal (e.g. .length and .width
+        in a Rectangle). So for example, Rectangles with dimensions 3x8 and 4x6 are
+        considered equal here, because they both have area 24.
+
+        :param other: another object belonging to a Shape subclass.
+        :return: True for "equals", False otherwise.
+        """
+        if not issubclass(type(other), Shape):
+            raise TypeError(f"__eq__ expects rhs type is Shape subclass, not {type(other)}")
+        return self.name == other.name and self.area == other.area
+
+    def __lt__(self, other) -> bool:
+        """
+        Less-than operator, adhering to match criteria in DrawingProgram::sort_shapes(),
+        for which the criteria is only that both of the following match:
+        * different shape types, based on lexical comparison of respective names.
+        * same shape type, based numerical comparison of respective area values.
+
+        :param other: another object belonging to a Shape subclass.
+        :return: True for "less than", False otherwise.
+        """
+        if not issubclass(type(other), Shape):
+            raise TypeError(f"__lt__ expects rhs type is Shape subclass, not {type(other)}")
+        if self.name != other.name:
+            return self.name < other.name
+        return self.area < other.area
+
     @property
     @abstractmethod
     def area(self) -> float:

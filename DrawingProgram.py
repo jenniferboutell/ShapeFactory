@@ -48,7 +48,11 @@ class DrawingProgram:
 
     def remove_shape(self, shape: Optional[Shape] = None) -> int:
         """
-        Remove from the shapes collection all that match type the shape passed in.
+        Remove from the shapes collection all that are identical to the
+        shape passed in. Here, "identical" is in the geometric sense.
+        E.g. a Rectangle with length=2 and width=3 is considered identical
+        to a Rectangle with length=3 and width=2, i.e. length and width
+        are considered interchangeable.
 
         :param shape: instance of Shape or one of its subclasses.
         :return: The number of shapes removed from the collection.
@@ -57,7 +61,7 @@ class DrawingProgram:
             raise TypeError(f"remove_shape expects shape of type None or a Shape subclass, but got {type(shape)}")
         counter = 0
         for s in self.__shapes:
-            if shape is None or isinstance(s, type(shape)):
+            if shape is None or shape.identical(s):
                 self.__shapes.remove(s)
                 counter += 1
         return counter
@@ -76,6 +80,35 @@ class DrawingProgram:
             if shape is None or isinstance(s, type(shape)):
                 print(s)
 
+    @staticmethod
+    def merge_sort(shapes):
+        if len(shapes) > 1:
+            mid = len(shapes) // 2
+            left = shapes[:mid]
+            right = shapes[mid:]
+            DrawingProgram.merge_sort(left)
+            DrawingProgram.merge_sort(right)
+            i = j = k = 0
+            while i < len(left) and j < len(right):
+                if left[i] < right[j]:
+                    shapes[k] = left[i]
+                    i = i+1
+                else:
+                    shapes[k] = right[j]
+                    j = j+1
+                k = k+1
+
+            while i < len(left):
+                shapes[k] = left[i]
+                i = i+1
+                k = k+1
+
+            while j < len(right):
+                shapes[k] = right[j]
+                j = j+1
+                k = k+1
+        return shapes
+
     def sort_shapes(self) -> None:
         """
         Sorts the collection of shapes, replacing the current collection order.
@@ -84,8 +117,7 @@ class DrawingProgram:
 
         :return: None
         """
-        # TODO in-place Merge sort
-        pass
+        self.__shapes = self.merge_sort(self.__shapes)
 
     def get_shape(self, index: int) -> Optional[Shape]:
         """

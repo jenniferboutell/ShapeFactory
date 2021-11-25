@@ -1,6 +1,5 @@
 from typing import Union
 
-# from Shape import Shape
 from Rectangle import Rectangle
 from Square import Square
 from Triangle import Triangle
@@ -41,10 +40,15 @@ class ShapeFactory:
     def create_rectangle(*shape_data) -> Rectangle:
         """
         Builds a new Rectangle.
+        As a special case, if length and width are same, instead builds a Square.
 
         :param shape_data: Length and width of the rectangle.
         :return: newly created Rectangle.
         """
+        if len(shape_data) != 2:
+            raise ValueError(f"Rectangle requires 2 params, got {len(shape_data)}")
+        if shape_data[0] == shape_data[1]:
+            return Square(shape_data[0])
         return Rectangle(*shape_data)
 
     @staticmethod

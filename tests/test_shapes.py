@@ -19,6 +19,9 @@ class MockShape(Shape):
         self.__arg1 = arg1
         self.__arg2 = arg2
 
+    def identical(self, other) -> bool:
+        return False
+
     @property
     def area(self) -> float:
         return 0.0
@@ -83,6 +86,44 @@ def test_circle(capsys):
     assert capt.out == f"{s}\n"
 
 
+def test_sort_eq_lt():
+    # Different types, so lexical comparison of names
+    assert Circle(2) != Square(2)
+    assert Circle(2) < Square(2)
+    assert Rectangle(3, 4) < Square(2)
+
+    # Same types, so numerical comparison of areas
+    assert Circle(2) == Circle(2)
+    assert Circle(2) != Circle(3)
+    assert Circle(2) < Circle(3)
+    assert Rectangle(2, 3) == Rectangle(2, 3)
+    assert Rectangle(3, 2) == Rectangle(2, 3)
+    assert Rectangle(4, 6) == Rectangle(3, 8)
+    assert Rectangle(4, 6) != Rectangle(3, 9)
+    assert Rectangle(4, 6) < Rectangle(3, 9)
+    assert Triangle(3, 4, 5) == Triangle(3, 4, 5)
+    assert Triangle(5, 4, 3) == Triangle(3, 4, 5)
+    assert Triangle(5, 4, 3) != Triangle(4, 4, 5)
+    assert Triangle(5, 4, 3) < Triangle(4, 4, 5)
+
+
+def test_identical():
+    # Different types
+    assert not Circle(2).identical(Square(2))
+    assert not Rectangle(3, 4).identical(Square(2))
+    assert not Square(2).identical(Triangle(1, 2, 3))
+
+    # Same types, so unordered comparison of attributes
+    assert Circle(2).identical(Circle(2))
+    assert not Circle(2).identical(Circle(3))
+    assert Rectangle(2, 3).identical(Rectangle(2, 3))
+    assert Rectangle(3, 2).identical(Rectangle(2, 3))
+    assert not Rectangle(4, 6).identical(Rectangle(3, 8))
+    assert Triangle(3, 4, 5).identical(Triangle(3, 4, 5))
+    assert Triangle(5, 4, 3).identical(Triangle(3, 4, 5))
+    assert not Triangle(5, 4, 4).identical(Triangle(3, 4, 5))
+
+
 def test_shape_factory():
     """
     Could have implemented __eq__ in each of the Shape subclasses,
@@ -115,3 +156,5 @@ def test_shape_factory():
 
 if __name__ == '__main__':
     print("Run pytest, you fool!")
+
+# END
