@@ -12,11 +12,18 @@ class Circle(Shape):
         self.__radius = float(radius)
 
     @property
+    def radius(self) -> float:
+        return self.__radius
+
+    def identical(self, other) -> bool:
+        return type(self) == type(other) and self.radius == other.radius
+
+    @property
     def area(self) -> float:
-        return pi * (self.__radius ** 2)
+        return pi * (self.radius ** 2)
 
     @property
     def perimeter(self) -> float:
-        return 2 * pi * self.__radius
+        return 2 * pi * self.radius
 
 # END

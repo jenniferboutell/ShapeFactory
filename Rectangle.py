@@ -12,11 +12,23 @@ class Rectangle(Shape):
         self.__width: float = float(width)
 
     @property
+    def length(self) -> float:
+        return self.__length
+
+    @property
+    def width(self) -> float:
+        return self.__width
+
+    def identical(self, other) -> bool:
+        return type(self) == type(other) and \
+               {self.length, self.width} == {other.length, other.width}
+
+    @property
     def area(self) -> float:
-        return self.__width * self.__length
+        return self.width * self.length
 
     @property
     def perimeter(self) -> float:
-        return 2 * (self.__length + self.__width)
+        return 2 * (self.length + self.width)
 
 # END
